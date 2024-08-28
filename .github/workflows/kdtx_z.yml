@@ -1,0 +1,51 @@
+name: Update Radar Reflectivity
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Every 5 minutes
+
+jobs:
+  update_radar_reflectivity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.18'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install matplotlib metpy==1.6.2 siphon==0.9 cartopy protobuf==3.20.3 numpy==1.26.4
+
+      - name: Delete old plots if they exist
+        run: |
+          find reflectivity/kdtx/ -name 'z_*.png' -exec rm {} +
+
+      - name: Run doppler_radar_Z.py
+        run: python doppler_radar_Z.py
+      
+      - name: Commit and push Reflectivity changes
+        run: |
+          git config --local user.email "tonyillenden@gmail.com"
+          git config --local user.name "anthony-illenden"
+          # Stash any changes including untracked files
+          git stash push -u
+          # Pull with rebase
+          git pull --rebase origin main
+          # Pop the stash
+          git stash pop
+          # Add changes to staging area again
+          git add reflectivity/kdtx/z_*.png
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            # Now commit and push
+            git commit -m "Update Radar Reflectivity Plots"
+            git push origin main
+          fi
