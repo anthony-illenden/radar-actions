@@ -65,5 +65,5 @@ for ds_name in sorted(catalog.datasets):
     cbar = fig.colorbar(img, orientation='vertical', label='Radial Velocity (mph)', fraction=0.046, pad=0.04)
     cbar.set_ticks(np.arange(-100, 101, 20))
     plt.text(0.995, 0.975, 'Max V: {}'.format((np.abs(v_clean)).max()), horizontalalignment='right', transform=ax.transAxes)
-    plt.savefig('plots/doppler_radar/base_V/Velocity_{}.png'.format(count), dpi=450, bbox_inches='tight')
+    plt.savefig('velocity/kdtx/v_{}.png'.format(count), dpi=450, bbox_inches='tight')
     count += 1
