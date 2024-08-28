@@ -67,5 +67,5 @@ for ds_name in sorted(catalog.datasets):
     print(ref_clean2.max())
     plt.text(0.995, 0.975, 'Max dBZ: {}'.format(ref_clean2.max()), horizontalalignment='right', transform=ax.transAxes)
     plt.show()
-    plt.savefig('plots/doppler_radar/base_Z/Reflectivity_{}.png'.format(count), dpi=450, bbox_inches='tight')
+    plt.savefig('reflectivity/kdtx/z_{}.png'.format(count), dpi=450, bbox_inches='tight')
     count += 1
