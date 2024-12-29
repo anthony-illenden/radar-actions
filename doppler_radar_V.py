@@ -61,7 +61,7 @@ for ds_name in sorted(catalog.datasets):
     ax.add_feature(cfeature.LAND, color='#fbf5e9')
     ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
     plt.title('{} Base Radial Velocity at {} UTC'.format(data.Station, formatted_datetime), loc='center')
-    img = ax.pcolormesh(x_v, y_v,v_clean, cmap=metpy.plots.ctables.registry.get_colortable('NWS8bitVel'), vmin=-100, vmax=100, zorder=0)
+    img = ax.pcolormesh(x_v, y_v,v_clean, cmap=metpy.plots.ctables.registry.get_colortable('NWS8bitVel'), vmin=-100, vmax=100, zorder=99)
     cbar = fig.colorbar(img, orientation='vertical', label='Radial Velocity (mph)', fraction=0.046, pad=0.04)
     cbar.set_ticks(np.arange(-100, 101, 20))
     plt.text(0.995, 0.975, 'Max V: {}'.format((np.abs(v_clean)).max()), horizontalalignment='right', transform=ax.transAxes)
