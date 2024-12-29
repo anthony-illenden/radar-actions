@@ -61,7 +61,7 @@ for ds_name in sorted(catalog.datasets):
     ax.add_feature(cfeature.LAND, color='#fbf5e9')
     ax.plot(-83.47, 42.7, 'ro', markersize=5, transform=ccrs.PlateCarree(), zorder=2, color='black')
     plt.title('{} Base Reflectivity at {} UTC'.format(data.Station, formatted_datetime), loc='center')
-    img = ax.pcolormesh(x, y, ref_clean2, cmap=metpy.plots.ctables.registry.get_colortable('NWSStormClearReflectivity'), vmin=-35, vmax=80, zorder=0)
+    img = ax.pcolormesh(x, y, ref_clean2, cmap=metpy.plots.ctables.registry.get_colortable('NWSStormClearReflectivity'), vmin=-35, vmax=80, zorder=99)
     cbar = fig.colorbar(img, orientation='vertical', label='Reflectivity (dBZ)', fraction=0.046, pad=0.04)
     cbar.set_ticks(np.arange(-35, 81, 10))
     print(ref_clean2.max())
